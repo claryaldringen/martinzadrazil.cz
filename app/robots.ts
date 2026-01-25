@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/const';
 
 const robots = (): MetadataRoute.Robots => {
   return {
@@ -6,7 +7,7 @@ const robots = (): MetadataRoute.Robots => {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://martinzadrazil.cz/sitemap.xml',
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 };
 

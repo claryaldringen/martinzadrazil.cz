@@ -193,6 +193,12 @@ export const HomePage = ({ t }: { t: HomeDictionary }) => {
               >
                 {t.contact.ctaLinkedIn}
               </a>
+              <a
+                href={t.contact.gitHubUrl}
+                className="inline-flex items-center justify-center px-5 py-2 rounded-md text-sm font-medium border border-gray-200 hover:border-gray-400"
+              >
+                {t.contact.ctaGitHub}
+              </a>
 
               <div className="text-xs text-gray-500 md:text-right">{t.contact.hint}</div>
             </div>

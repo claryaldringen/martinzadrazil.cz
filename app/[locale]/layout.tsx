@@ -2,63 +2,55 @@ import type { Metadata } from 'next';
 import { type Locale, isLocale } from '@/lib/i18n';
 import { notFound } from 'next/navigation';
 import '../globals.css';
+import { SITE_URL } from '@/lib/const';
 
-const SITE_URL = 'https://martinzadrazil.com';
+const makeAlternates = (locale: Locale): Metadata['alternates'] => ({
+  canonical: `${SITE_URL}/${locale}`,
+  languages: {
+    cs: `${SITE_URL}/cs`,
+    en: `${SITE_URL}/en`,
+    'x-default': `${SITE_URL}/en`,
+  },
+});
 
 const metadataByLocale: Record<Locale, Metadata> = {
   cs: {
     title: 'Martin Zadražil – Full-stack vývojář | Node.js, React, GraphQL',
     description:
       'Vývoj webových aplikací a interních systémů na míru. Backend v Node.js s GraphQL, frontend v React/Next.js. Pomoc pro firmy mimo IT i krátkodobé kontrakty pro vývojové týmy.',
-
     openGraph: {
       title: 'Martin Zadražil – Full-stack vývojář',
       description:
         'Webové aplikace, interní systémy a CMS na míru. Node.js, React, GraphQL.',
-      url: SITE_URL,
+      url: `${SITE_URL}/cs`, // ✅ per-locale
       siteName: 'Martin Zadražil',
       locale: 'cs_CZ',
       type: 'website',
     },
-
-    alternates: {
-      canonical: `${SITE_URL}/cs`,
-      languages: {
-        'cs-CZ': `${SITE_URL}/cs`,
-        'en-US': `${SITE_URL}/en`,
-      },
-    },
+    alternates: makeAlternates('cs'),
   },
 
   en: {
     title: 'Martin Zadražil – Full-stack Developer | Node.js, React, GraphQL',
     description:
       'Custom web applications and internal systems. Backend with Node.js & GraphQL, frontend in React/Next.js. Contract help for teams and end-to-end delivery.',
-
     openGraph: {
       title: 'Martin Zadražil – Full-stack Developer',
       description:
         'Custom web applications, internal systems and CMS. Node.js, React, GraphQL.',
-      url: SITE_URL,
+      url: `${SITE_URL}/en`, // ✅ per-locale
       siteName: 'Martin Zadražil',
       locale: 'en_US',
       type: 'website',
     },
-
-    alternates: {
-      canonical: `${SITE_URL}/en`,
-      languages: {
-        'cs-CZ': `${SITE_URL}/cs`,
-        'en-US': `${SITE_URL}/en`,
-      },
-    },
+    alternates: makeAlternates('en'),
   },
 };
 
 export const generateMetadata = async ({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> => {
   const { locale } = await params;
 

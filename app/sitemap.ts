@@ -1,17 +1,16 @@
 import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/const';
 
 const sitemap = (): MetadataRoute.Sitemap => {
-  const baseUrl = 'https://martinzadrazil.com';
-
   return [
     {
-      url: `${baseUrl}/cs`,
+      url: `${SITE_URL}/cs`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/en`,
+      url: `${SITE_URL}/en`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,

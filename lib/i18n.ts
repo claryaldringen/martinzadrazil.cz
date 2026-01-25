@@ -75,6 +75,7 @@ export type HomeDictionary = {
     intro: string;
     ctaEmail: string;
     ctaLinkedIn: string;
+    ctaGitHub: string;
     hint: string;
 
     facts: {
@@ -88,7 +89,7 @@ export type HomeDictionary = {
 
     email: string;
     linkedinUrl: string;
-    linkedinLabel: string;
+    gitHubUrl: string;
   };
 };
 
@@ -344,6 +345,7 @@ export const dict = {
 
       ctaEmail: 'Napsat e-mail',
       ctaLinkedIn: 'LinkedIn',
+      ctaGitHub: 'GitHub',
 
       hint: 'Preferuji e-mail • Odpověď obvykle do 1–2 dnů',
 
@@ -358,7 +360,7 @@ export const dict = {
 
       email: 'zadram1@gmail.com',
       linkedinUrl: 'https://www.linkedin.com/in/martin-zadrazil-47b6141b/',
-      linkedinLabel: 'LinkedIn',
+      gitHubUrl: 'https://github.com/claryaldringen',
     },
   },
 
@@ -607,6 +609,7 @@ export const dict = {
 
       ctaEmail: 'Send an email',
       ctaLinkedIn: 'LinkedIn',
+      ctaGitHub: 'GitHub',
 
       hint: 'Email preferred • Usually reply within 1–2 days',
 
@@ -621,7 +624,7 @@ export const dict = {
 
       email: 'zadram1@gmail.com',
       linkedinUrl: 'https://www.linkedin.com/in/martin-zadrazil-47b6141b/',
-      linkedinLabel: 'LinkedIn',
+      gitHubUrl: 'https://github.com/claryaldringen',
     },
   },
 } satisfies Record<Locale, HomeDictionary>;
