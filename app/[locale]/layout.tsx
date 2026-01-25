@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { locales, type Locale } from '@/lib/i18n';
+import { type Locale, isLocale } from '@/lib/i18n';
 import { notFound } from 'next/navigation';
 import '../globals.css';
 
@@ -62,9 +62,7 @@ export const generateMetadata = async ({
 }): Promise<Metadata> => {
   const { locale } = await params;
 
-  if (!locales.includes(locale)) {
-    notFound();
-  }
+  if (!isLocale(locale)) notFound();
 
   return metadataByLocale[locale];
 };
@@ -74,13 +72,11 @@ const LocaleLayout = async ({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) => {
   const { locale } = await params;
 
-  if (!locales.includes(locale)) {
-    notFound();
-  }
+  if (!isLocale(locale)) notFound();
 
   return (
     <html lang={locale}>

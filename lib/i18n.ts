@@ -3,10 +3,10 @@ export type Locale = 'cs' | 'en';
 export const locales: Locale[] = ['cs', 'en'];
 export const defaultLocale: Locale = 'cs';
 
-/**
- * 🔒 Jediný zdroj pravdy pro strukturu překladů
- * hodnoty jsou stringy, ne literály
- */
+export const isLocale = (value: string): value is Locale => {
+  return (locales as readonly string[]).includes(value);
+};
+
 export type HomeDictionary = {
   nav: {
     uvod: string;
