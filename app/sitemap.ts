@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 const sitemap = (): MetadataRoute.Sitemap => {
-  const baseUrl = 'https://martinzadrazil.cz';
+  const baseUrl = 'https://martinzadrazil.com';
 
   return [
     {

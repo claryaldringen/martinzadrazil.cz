@@ -3,7 +3,7 @@ import { type Locale, isLocale } from '@/lib/i18n';
 import { notFound } from 'next/navigation';
 import '../globals.css';
 
-const SITE_URL = 'https://martinzadrazil.cz';
+const SITE_URL = 'https://martinzadrazil.com';
 
 const metadataByLocale: Record<Locale, Metadata> = {
   cs: {
