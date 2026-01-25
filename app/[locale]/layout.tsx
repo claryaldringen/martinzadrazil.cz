@@ -13,37 +13,23 @@ const makeAlternates = (locale: Locale): Metadata['alternates'] => ({
   },
 });
 
-const metadataByLocale: Record<Locale, Metadata> = {
-  cs: {
-    title: 'Martin Zadražil – Full-stack vývojář | Node.js, React, GraphQL',
-    description:
-      'Vývoj webových aplikací a interních systémů na míru. Backend v Node.js s GraphQL, frontend v React/Next.js. Pomoc pro firmy mimo IT i krátkodobé kontrakty pro vývojové týmy.',
-    openGraph: {
-      title: 'Martin Zadražil – Full-stack vývojář',
-      description:
-        'Webové aplikace, interní systémy a CMS na míru. Node.js, React, GraphQL.',
-      url: `${SITE_URL}/cs`, // ✅ per-locale
-      siteName: 'Martin Zadražil',
-      locale: 'cs_CZ',
-      type: 'website',
-    },
-    alternates: makeAlternates('cs'),
-  },
-
+const ogByLocale: Record<
+  Locale,
+  { title: string; description: string; image: string; locale: string }
+> = {
   en: {
-    title: 'Martin Zadražil – Full-stack Developer | Node.js, React, GraphQL',
+    title: 'Martin Zadražil – Full-stack Developer',
     description:
-      'Custom web applications and internal systems. Backend with Node.js & GraphQL, frontend in React/Next.js. Contract help for teams and end-to-end delivery.',
-    openGraph: {
-      title: 'Martin Zadražil – Full-stack Developer',
-      description:
-        'Custom web applications, internal systems and CMS. Node.js, React, GraphQL.',
-      url: `${SITE_URL}/en`, // ✅ per-locale
-      siteName: 'Martin Zadražil',
-      locale: 'en_US',
-      type: 'website',
-    },
-    alternates: makeAlternates('en'),
+      'Custom web applications and internal systems. Backend with Node.js & GraphQL, frontend in React/Next.js.',
+    image: '/og/en.jpg',
+    locale: 'en_US',
+  },
+  cs: {
+    title: 'Martin Zadražil – Full-stack vývojář',
+    description:
+      'Webové aplikace a interní systémy. Backend v Node.js & GraphQL, frontend v React/Next.js.',
+    image: '/og/cs.jpg',
+    locale: 'cs_CZ',
   },
 };
 
@@ -53,10 +39,49 @@ export const generateMetadata = async ({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> => {
   const { locale } = await params;
-
   if (!isLocale(locale)) notFound();
 
-  return metadataByLocale[locale];
+  const og = ogByLocale[locale as Locale];
+
+  return {
+    metadataBase: new URL(SITE_URL),
+
+    title:
+      locale === 'cs'
+        ? 'Martin Zadražil – Full-stack vývojář | Node.js, React, GraphQL'
+        : 'Martin Zadražil – Full-stack Developer | Node.js, React, GraphQL',
+
+    description:
+      locale === 'cs'
+        ? 'Vývoj webových aplikací a interních systémů na míru. Backend v Node.js s GraphQL, frontend v React/Next.js. Pomoc pro firmy mimo IT i krátkodobé kontrakty pro vývojové týmy.'
+        : 'Custom web applications and internal systems. Backend with Node.js & GraphQL, frontend in React/Next.js. Contract help for teams and end-to-end delivery.',
+
+    alternates: makeAlternates(locale as Locale),
+
+    openGraph: {
+      title: og.title,
+      description: og.description,
+      url: `${SITE_URL}/${locale}`,
+      siteName: 'Martin Zadražil',
+      locale: og.locale,
+      type: 'website',
+      images: [
+        {
+          url: og.image,
+          width: 1200,
+          height: 630,
+          alt: og.title,
+        },
+      ],
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      title: og.title,
+      description: og.description,
+      images: [og.image],
+    },
+  };
 };
 
 const LocaleLayout = async ({
