@@ -56,7 +56,9 @@ export const buildJsonLd = (locale: Locale) => {
       {
         '@type': 'Service',
         '@id': serviceId,
-        name: 'Full-stack web application development',
+        name: isCs
+          ? 'Vývoj full-stack webových aplikací'
+          : 'Full-stack web application development',
         provider: { '@id': personId },
         areaServed: 'EU',
         availableChannel: {

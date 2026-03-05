@@ -3,6 +3,8 @@ import { HomePage } from '@/components/home/HomePage';
 import { getDictionary, locales, type Locale } from '@/lib/i18n';
 import { buildJsonLd } from '@/lib/jsonLd';
 
+export const generateStaticParams = () => locales.map((locale) => ({ locale }));
+
 const Page = async ({ params }: { params: Promise<{ locale: Locale }> }) => {
   const { locale } = await params;
 

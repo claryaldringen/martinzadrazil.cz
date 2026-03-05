@@ -46,6 +46,7 @@ export type HomeDictionary = {
   projects: {
     title: string;
     description: string;
+    periodLabel: string;
     items: Array<{
       name: string;
       subtitle: string;
@@ -165,6 +166,7 @@ export const dict = {
       title: 'S kým jsem spolupracoval',
       description:
         'Pracoval jsem pro firmy z různých odvětví – od velkých online služeb přes poradenské společnosti až po výzkumné týmy. Níže je přehled spoluprací a toho, co jsem na projektech dělal.',
+      periodLabel: 'Spolupráce',
       items: [
         {
           name: 'IBM Research',
@@ -435,6 +437,7 @@ export const dict = {
       title: 'Who I’ve worked with',
       description:
         'I’ve worked with companies across different industries — from large online services to consulting firms and research teams. Below is an overview of collaborations and what I did on each project.',
+      periodLabel: 'Collaboration',
       items: [
         {
           name: 'IBM Research',

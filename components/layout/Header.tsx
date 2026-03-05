@@ -22,12 +22,13 @@ export const Header = ({
   return (
     <header className="sticky top-0 z-30 bg-white/70 backdrop-blur">
       <div className="mx-auto max-w-5xl flex items-center justify-between py-4 px-4">
-        <div
+        <button
+          type="button"
           className="font-semibold cursor-pointer"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           {name}
-        </div>
+        </button>
         <nav className="hidden sm:flex gap-5 text-sm">
           {sections.map((s) => (
             <button

@@ -1,6 +1,3 @@
-'use client';
-
-import type { MouseEvent } from 'react';
 import Image from 'next/image';
 
 import { Header, type NavSection } from '@/components/layout/Header';
@@ -9,7 +6,7 @@ import { ServiceCard } from '@/components/home/ServiceCard';
 import { ProjectCard } from '@/components/home/ProjectCard';
 import { Tag } from '@/components/home/Tag';
 import { CooperationCard } from '@/components/home/CooperationCard';
-import { scrollToId } from '@/lib/scroll';
+import { ScrollButton } from '@/components/home/ScrollButton';
 import type { HomeDictionary } from '@/lib/i18n';
 import { LanguageSwitch } from '@/components/layout/LanguageSwitch';
 
@@ -22,14 +19,6 @@ export const HomePage = ({ t }: { t: HomeDictionary }) => {
     { id: 'spoluprace', label: t.nav.spoluprace },
     { id: 'kontakt', label: t.nav.kontakt },
   ];
-
-  const handleScroll = (
-    e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-    id: string,
-  ): void => {
-    e.preventDefault();
-    scrollToId(id);
-  };
 
   return (
     <div className="min-h-screen">
@@ -64,19 +53,19 @@ export const HomePage = ({ t }: { t: HomeDictionary }) => {
             <p className="text-lg text-gray-600 max-w-3xl">{t.hero.subtitle}</p>
 
             <div className="flex gap-3">
-              <button
-                onClick={(e) => handleScroll(e, 'kontakt')}
+              <ScrollButton
+                targetId="kontakt"
                 className="bg-gray-900 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-black cursor-pointer"
               >
                 {t.hero.ctaContact}
-              </button>
+              </ScrollButton>
 
-              <button
-                onClick={(e) => handleScroll(e, 'projekty')}
+              <ScrollButton
+                targetId="projekty"
                 className="px-5 py-2 rounded-md text-sm font-medium border border-gray-200 hover:border-gray-400 cursor-pointer"
               >
                 {t.hero.ctaProjects}
-              </button>
+              </ScrollButton>
             </div>
           </div>
         </section>
@@ -125,6 +114,7 @@ export const HomePage = ({ t }: { t: HomeDictionary }) => {
                 name={p.name}
                 subtitle={p.subtitle}
                 period={p.period}
+                periodLabel={t.projects.periodLabel}
                 logoClassName={p.logoClassName ?? ''}
                 tags={
                   p.tags?.length ? (
@@ -189,12 +179,16 @@ export const HomePage = ({ t }: { t: HomeDictionary }) => {
 
               <a
                 href={t.contact.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-5 py-2 rounded-md text-sm font-medium border border-gray-200 hover:border-gray-400"
               >
                 {t.contact.ctaLinkedIn}
               </a>
               <a
                 href={t.contact.gitHubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-5 py-2 rounded-md text-sm font-medium border border-gray-200 hover:border-gray-400"
               >
                 {t.contact.ctaGitHub}

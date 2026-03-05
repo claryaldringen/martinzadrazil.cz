@@ -45,6 +45,9 @@ export const generateMetadata = async ({
 
   return {
     metadataBase: new URL(SITE_URL),
+    icons: {
+      icon: '/favicon.ico',
+    },
 
     title:
       locale === 'cs'

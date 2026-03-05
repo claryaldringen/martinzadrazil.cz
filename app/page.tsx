@@ -1,6 +1,6 @@
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { defaultLocale, type Locale } from '@/lib/i18n';
+import { defaultLocale, isLocale, type Locale } from '@/lib/i18n';
 
 const pickLocaleFromAcceptLanguage = (value: string | null): Locale => {
   if (!value) {
@@ -14,6 +14,13 @@ const pickLocaleFromAcceptLanguage = (value: string | null): Locale => {
 };
 
 const Page = async () => {
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get('locale')?.value;
+
+  if (localeCookie && isLocale(localeCookie)) {
+    redirect(`/${localeCookie}`);
+  }
+
   const headersData = await headers();
   const locale = pickLocaleFromAcceptLanguage(headersData.get('accept-language'));
   redirect(`/${locale}`);
